@@ -6,7 +6,7 @@
 #    By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/20 13:23:46 by lowatell          #+#    #+#              #
-#    Updated: 2024/11/29 18:44:21 by lowatell         ###   ########.fr        #
+#    Updated: 2024/11/29 23:05:42 by lowatell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,10 @@ CFLAGS = -g -Wall -Wextra -Werror
 RM = rm -rf
 
 LINUX_AR = .linux/*.a
-LINUX_FLAGS = -lmlx -lXext -lX11 -L $(INCS_DIR)
+LINUX_FLAGS = -lmlx -lXext -lX11 -L .linux
 
 MAC_AR = .macos/*.a
-MAC_FLAGS = -lmlx -framework OpenGL -framework AppKit -L $(INCS_DIR)
+MAC_FLAGS = -lmlx -framework OpenGL -framework AppKit -L .macos
 
 ifeq ($(shell uname -s), Linux)
 	MLXA = $(LINUX_AR)
