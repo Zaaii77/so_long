@@ -6,7 +6,7 @@
 #    By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/20 13:23:46 by lowatell          #+#    #+#              #
-#    Updated: 2024/11/27 23:29:42 by lowatell         ###   ########.fr        #
+#    Updated: 2024/11/29 18:44:21 by lowatell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,21 @@ CC = cc
 CFLAGS = -g -Wall -Wextra -Werror
 RM = rm -rf
 
+LINUX_AR = .linux/*.a
+LINUX_FLAGS = -lmlx -lXext -lX11 -L $(INCS_DIR)
+
+MAC_AR = .macos/*.a
+MAC_FLAGS = -lmlx -framework OpenGL -framework AppKit -L $(INCS_DIR)
+
 ifeq ($(shell uname -s), Linux)
-	MLXA = libmlx_Linux.a
+	MLXA = $(LINUX_AR)
+	FLAGS = $(LINUX_FLAGS)
 else ifeq ($(shell uname -s), Darwin)
-	MLXA = libmlx.a
+	MLXA = $(MAC_AR)
+	FLAGS = $(MAC_FLAGS)
 else
 	MLXA = 
+	FLAGS = 
 endif
 
 SRC_DIR = srcs
@@ -44,8 +53,6 @@ $(OBJS_DIR):
 
 clean:
 	@make clean -C libft --no-print-directory
-	@mv objs/libmlx_Linux.a .libmlx_Linux.a 
-	@mv objs/libmlx.a .libmlx.a 
 	@$(RM) $(OBJS_DIR)
 	@echo "$(GREEN)Objects files have been deleted."
 
@@ -58,9 +65,7 @@ re: fclean all
 $(NAME): $(OBJS)
 	@make -C libft/ --no-print-directory
 	@mv libft/libft.a $(OBJS_DIR)
-	@mv .libmlx_Linux.a objs/libmlx_Linux.a
-	@mv .libmlx.a objs/libmlx.a
-	@$(CC) $(CFLAGS) $(OBJS) $(OBJS_DIR)/libft.a $(OBJS_DIR)/$(MLXA) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(OBJS_DIR)/libft.a $(MLXA) -o $(NAME) $(FLAGS)
 	@echo "$(GREEN)$(NAME) has been compiled."
 
 .PHONY: all clean fclean re
