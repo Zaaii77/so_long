@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:45:49 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 01:44:04 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:22:48 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ int	parsing(int ac, char **av, t_game *game)
 	if (!game->map)
 		return (get_next_line(-1), 0);
 	if (!check_map(game->map))
-		return (ft_printf("map is not valid"), 0);
+		return (ft_printf("map is not valid\n"), 0);
+	if (!map_is_valid(game))
+		return (ft_printf("map isn't closed\n"), 0);
 	return (1);
 }
 
 int	check_map(char **map)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (map[i])
@@ -35,15 +37,14 @@ int	check_map(char **map)
 		j = i + 1;
 		while (map[j])
 		{
-			if (map[j + 1])
-			{
-				if (ft_strlen(map[j]) != ft_strlen(map[i]))
-					return (0);
-			}
+			if (ft_strlen(map[j]) != ft_strlen(map[i]))
+				return (0);
 			j++;
 		}
 		i++;
 	}
+	if (++i == ft_strlen(map[0]))
+		return (0);
 	return (1);
 }
 
@@ -79,7 +80,7 @@ char	**fill_map(char *file)
 
 	size = line_count(file);
 	if (size < 4)
-		return (NULL);
+		return (0);
 	map = (char **)malloc((sizeof(char *) * size) + 1);
 	if (!map)
 		return (NULL);

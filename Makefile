@@ -6,7 +6,7 @@
 #    By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/20 13:23:46 by lowatell          #+#    #+#              #
-#    Updated: 2024/11/30 00:06:01 by lowatell         ###   ########.fr        #
+#    Updated: 2024/11/30 17:09:41 by lowatell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ OBJS_DIR = objs
 
 NAME = so_long
 
-SRCS =	main.c parsing.c
+SRCS =	main.c parsing.c map_is_valid.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
