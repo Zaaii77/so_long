@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 19:09:47 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:56:48 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,15 @@
 # include "../libft/incs/libft.h"
 # include <fcntl.h>
 
-# define UP 1
-# define LEFT 2
-# define RIGHT 3
-# define DOWN 4
+# ifdef __linux__
+#  define AFAIRE 0
+# else
+#  define UP 13
+#  define LEFT 0
+#  define RIGHT 2
+#  define DOWN 1
+#  define ESC 53
+# endif
 
 typedef struct s_game
 {
@@ -32,6 +37,7 @@ typedef struct s_game
 	int		x;
 	int		y;
 	int		move_count;
+	int		key;
 }	t_game;
 
 int		parsing(int ac, char **av, t_game *game);

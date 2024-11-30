@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:42:51 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 19:24:32 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:58:46 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	move_up(t_game *game)
 		game->map[x][y] = '0';
 		game->map[x - 1][y] = 'P';
 		game->x--;
+		game->move_count++;
 		return (1);
 	}
 	return (0);
@@ -48,6 +49,7 @@ int	move_left(t_game *game)
 		game->map[x][y] = '0';
 		game->map[x][y - 1] = 'P';
 		game->y--;
+		game->move_count++;
 		return (1);
 	}
 	return (0);
@@ -68,6 +70,7 @@ int	move_right(t_game *game)
 		game->map[x][y] = '0';
 		game->map[x][y + 1] = 'P';
 		game->y++;
+		game->move_count++;
 		return (1);
 	}
 	return (0);
@@ -89,6 +92,7 @@ int	move_bot(t_game *game)
 		game->map[x][y] = '0';
 		game->map[x + 1][y] = 'P';
 		game->x++;
+		game->move_count++;
 		return (1);
 	}
 	return (0);
