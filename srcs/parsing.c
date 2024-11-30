@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:45:49 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 18:22:48 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:36:58 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	parsing(int ac, char **av, t_game *game)
 {
-	if (ac < 2 || ac > 3)
-		return (0);
+	if (ac < 2 || ac > 3 || !is_valid_file(av[1]))
+		return (ft_printf("file not valid\n"), 0);
 	game->map = fill_map(av[1]);
 	if (!game->map)
 		return (get_next_line(-1), 0);
@@ -24,6 +24,22 @@ int	parsing(int ac, char **av, t_game *game)
 	if (!map_is_valid(game))
 		return (ft_printf("map isn't closed\n"), 0);
 	return (1);
+}
+
+int	is_valid_file(char *file)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = ft_strlen(file) - 1;
+	if (file[j] == 'r')
+		if (file[j - 1] == 'e')
+			if (file[j - 2] == 'b')
+				if (file[j - 3] == '.')
+					if ((j - 4) > i)
+						return (1);
+	return (0);
 }
 
 int	check_map(char **map)

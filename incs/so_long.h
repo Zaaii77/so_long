@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 17:54:13 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:37:29 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_game
 int		parsing(int ac, char **av, t_game *game);
 int		check_map(char **map);
 int		map_is_valid(t_game *game);
+int		is_valid_file(char *file);
 char	**fill_map(char *file);
 
 #endif
