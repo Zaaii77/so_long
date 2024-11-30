@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 18:37:29 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:09:47 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,17 @@
 # include "../libft/incs/libft.h"
 # include <fcntl.h>
 
+# define UP 1
+# define LEFT 2
+# define RIGHT 3
+# define DOWN 4
+
 typedef struct s_game
 {
 	char	**map;
 	int		p;
 	int		c;
+	int		collected;
 	int		e;
 	int		x;
 	int		y;
@@ -32,6 +38,8 @@ int		parsing(int ac, char **av, t_game *game);
 int		check_map(char **map);
 int		map_is_valid(t_game *game);
 int		is_valid_file(char *file);
+int		move(t_game *game, int key);
+int		move_end(t_game *game, int key);
 char	**fill_map(char *file);
 
 #endif

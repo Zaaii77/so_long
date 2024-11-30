@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:48:39 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 18:28:18 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:08:33 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	map_is_valid(t_game *game)
 	game->e = 0;
 	game->x = 0;
 	game->y = 0;
+	game->collected = 0;
 	game->move_count = 0;
 	if (!is_closed(game->map))
 		return (0);
