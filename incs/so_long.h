@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 19:56:48 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/11/30 21:36:54 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 #  define ESC 53
 # endif
 
+# define WALL "../textures/wall.xpm"
+# define PLAYER "../textures/player.xpm"
+# define FLOOR "../textures/floor.xpm"
+# define EXIT "../textures/exit.xpm"
+# define EXIT_OPEN "../textures/exit_open.xpm"
+
 typedef struct s_game
 {
 	char	**map;
@@ -37,8 +43,25 @@ typedef struct s_game
 	int		x;
 	int		y;
 	int		move_count;
-	int		key;
+	int		end;
 }	t_game;
+
+typedef struct	s_sprite
+{
+	void	*wall;
+	void	*object;
+	void	*player;
+	void	*floor;
+	void	*exit;
+}	t_sprite;
+
+typedef struct	s_data
+{
+	t_sprite sprite;
+	t_game	game;
+	void	*mlx;
+	void	*wind;
+}	t_data;
 
 int		parsing(int ac, char **av, t_game *game);
 int		check_map(char **map);
