@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 21:36:54 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:48:22 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		map_is_valid(t_game *game);
 int		is_valid_file(char *file);
 int		move(t_game *game, int key);
 int		move_end(t_game *game, int key);
+int		is_finishable(t_game *game);
 char	**fill_map(char *file);
 
 #endif

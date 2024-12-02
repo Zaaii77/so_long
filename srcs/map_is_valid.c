@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:48:39 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 21:47:10 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:50:17 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	map_is_valid(t_game *game)
 		return (0);
 	if (!is_playable(game) || !is_normed(game->map))
 		return (0);
-	if (!back_tracking(game->map))
+	if (!is_finishable(game))
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:42:51 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 19:58:46 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:13:38 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ int	move_up(t_game *game)
 
 	x = game->x;
 	y = game->y;
-	if (game->map[x][y] == 'P' && game->map[x - 1][y] != '1'
-		&& game->map[x - 1][y] != 'E')
+	if (game->map[x - 1][y] != '1')
 	{
 		if (game->map[x - 1][y] == 'C')
+		{
 			game->collected++;
-		game->map[x][y] = '0';
-		game->map[x][y] = '0';
-		game->map[x - 1][y] = 'P';
+			game->map[x - 1][y] = '0';
+		}
 		game->x--;
 		game->move_count++;
 		return (1);
@@ -41,13 +40,13 @@ int	move_left(t_game *game)
 
 	x = game->x;
 	y = game->y;
-	if (game->map[x][y] == 'P' && game->map[x][y - 1] != '1'
-		&& game->map[x][y - 1] != 'E')
+	if (game->map[x][y - 1] != '1')
 	{
 		if (game->map[x][y - 1] == 'C')
+		{
 			game->collected++;
-		game->map[x][y] = '0';
-		game->map[x][y - 1] = 'P';
+			game->map[x][y - 1] = '0';
+		}
 		game->y--;
 		game->move_count++;
 		return (1);
@@ -62,13 +61,13 @@ int	move_right(t_game *game)
 
 	x = game->x;
 	y = game->y;
-	if (game->map[x][y] == 'P' && game->map[x][y + 1] != '1'
-		&& game->map[x][y + 1] != 'E')
+	if (game->map[x][y + 1] != '1')
 	{
 		if (game->map[x][y + 1] == 'C')
+		{
 			game->collected++;
-		game->map[x][y] = '0';
-		game->map[x][y + 1] = 'P';
+			game->map[x][y + 1] = '0';
+		}
 		game->y++;
 		game->move_count++;
 		return (1);
@@ -83,14 +82,13 @@ int	move_bot(t_game *game)
 
 	x = game->x;
 	y = game->y;
-	if (game->map[x][y] == 'P' && game->map[x + 1][y] != '1'
-		&& game->map[x + 1][y] != 'E')
+	if (game->map[x + 1][y] != '1')
 	{
 		if (game->map[x + 1][y] == 'C')
+		{
 			game->collected++;
-		game->map[x][y] = '0';
-		game->map[x][y] = '0';
-		game->map[x + 1][y] = 'P';
+			game->map[x + 1][y] = '0';
+		}
 		game->x++;
 		game->move_count++;
 		return (1);
