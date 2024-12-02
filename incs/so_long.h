@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/01 22:48:22 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:40:46 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@
 #  define ESC 53
 # endif
 
-# define WALL "../textures/wall.xpm"
-# define PLAYER "../textures/player.xpm"
-# define FLOOR "../textures/floor.xpm"
-# define EXIT "../textures/exit.xpm"
-# define EXIT_OPEN "../textures/exit_open.xpm"
+# define CLOSEBTN 17
+
+# define COIN "textures/coin.xpm"
+# define WALL "textures/wall.xpm"
+# define PLAYER "textures/player.xpm"
+# define FLOOR "textures/floor.xpm"
+# define EXT "textures/exit.xpm"
+# define EXIT "textures/exit_open.xpm"
 
 typedef struct s_game
 {
@@ -49,9 +52,10 @@ typedef struct s_game
 typedef struct	s_sprite
 {
 	void	*wall;
-	void	*object;
+	void	*coin;
 	void	*player;
 	void	*floor;
+	void	*ext;
 	void	*exit;
 }	t_sprite;
 
@@ -71,5 +75,8 @@ int		move(t_game *game, int key);
 int		move_end(t_game *game, int key);
 int		is_finishable(t_game *game);
 char	**fill_map(char *file);
+void	error_msg(char *msg);
+void	hook_master(t_data *data);
+void	init_struct(t_data *data, t_sprite *sprite, t_game *game);
 
 #endif

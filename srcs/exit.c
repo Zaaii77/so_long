@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 23:31:19 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/02 19:41:52 by lowatell         ###   ########.fr       */
+/*   Created: 2024/12/02 18:19:58 by lowatell          #+#    #+#             */
+/*   Updated: 2024/12/02 18:21:05 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/so_long.h"
 
-int	main(int ac, char **av)
+void	error_msg(char *msg)
 {
-	t_data	data;
-
-	init_struct(&data, &data.sprite, &data.game);
-	if (!parsing(ac, av, &data.game))
-		return (0);
-	hook_master(&data);
-	return (0);
+	write(2, msg, ft_strlen(msg));
+	exit(0);
 }

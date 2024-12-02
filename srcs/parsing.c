@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:45:49 by lowatell          #+#    #+#             */
-/*   Updated: 2024/11/30 18:36:58 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/02 18:28:08 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 int	parsing(int ac, char **av, t_game *game)
 {
-	if (ac < 2 || ac > 3 || !is_valid_file(av[1]))
-		return (ft_printf("file not valid\n"), 0);
+	if (ac < 2 || ac > 3)
+		return (error_msg("Error\nYou may choose a file."), 0);
+	if (!is_valid_file(av[1]))
+		return (error_msg("Error\nChoose a valid file."), 0);
 	game->map = fill_map(av[1]);
 	if (!game->map)
-		return (get_next_line(-1), 0);
+		return (get_next_line(-1), error_msg("Error\n"), 0);
 	if (!check_map(game->map))
-		return (ft_printf("map is not valid\n"), 0);
+		return (error_msg("Error\nMap is not valid."), 0);
 	if (!map_is_valid(game))
-		return (ft_printf("map isn't closed\n"), 0);
+		return (error_msg("Error\nMap is not playable."), 0);
 	return (1);
 }
 
@@ -95,7 +97,7 @@ char	**fill_map(char *file)
 	int		size;
 
 	size = line_count(file);
-	if (size < 4)
+	if (size < 3)
 		return (0);
 	map = (char **)malloc((sizeof(char *) * size) + 1);
 	if (!map)
