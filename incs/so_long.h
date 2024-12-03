@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/02 19:40:46 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:53:15 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 #  define ESC 53
 # endif
 
+# define MCBHEIGHT 1112
+# define MCBWIDTH 1710
 # define CLOSEBTN 17
 
 # define COIN "textures/coin.xpm"
@@ -35,21 +37,23 @@
 # define FLOOR "textures/floor.xpm"
 # define EXT "textures/exit.xpm"
 # define EXIT "textures/exit_open.xpm"
+# define XPM 64
 
 typedef struct s_game
 {
 	char	**map;
+	int		width;
+	int		height;
 	int		p;
 	int		c;
 	int		collected;
 	int		e;
 	int		x;
 	int		y;
-	int		move_count;
-	int		end;
+	int		mc;
 }	t_game;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
 	void	*wall;
 	void	*coin;
@@ -59,23 +63,28 @@ typedef struct	s_sprite
 	void	*exit;
 }	t_sprite;
 
-typedef struct	s_data
+typedef struct s_data
 {
-	t_sprite sprite;
-	t_game	game;
-	void	*mlx;
-	void	*wind;
+	t_sprite	sprite;
+	t_game		game;
+	void		*mlx;
+	void		*wind;
 }	t_data;
 
 int		parsing(int ac, char **av, t_game *game);
 int		check_map(char **map);
 int		map_is_valid(t_game *game);
 int		is_valid_file(char *file);
-int		move(t_game *game, int key);
-int		move_end(t_game *game, int key);
+int		move(int key, t_data *data);
+int		move_end(int key, t_data *data);
 int		is_finishable(t_game *game);
-char	**fill_map(char *file);
+char	**fill_map(char *file, t_game *game);
+void	kill_sprites(t_sprite *sprite, t_data *data, char *msg);
 void	error_msg(char *msg);
+void	win_exit(t_data *data);
+void	clean_and_exit(t_data *data);
+void	move_player(t_data *data, int x, int y);
+void	draw_map(t_data *data, t_sprite *sprite, t_game *game);
 void	hook_master(t_data *data);
 void	init_struct(t_data *data, t_sprite *sprite, t_game *game);
 

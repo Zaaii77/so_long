@@ -6,110 +6,126 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:42:51 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/02 13:18:27 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:00:15 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/so_long.h"
 
-static int	move_up(t_game *game)
+static int	move_up(t_data *data)
 {
 	int	x;
 	int	y;
 
-	x = game->x;
-	y = game->y;
-	if (game->map[x - 1][y] != '1')
+	x = data->game.x;
+	y = data->game.y;
+	if (data->game.map[x - 1][y] != '1')
 	{
-		if (game->map[x - 1][y] == 'E')
+		if (data->game.map[x - 1][y] == 'E')
 		{
-			game->x--;
-			game->move_count++;
-			return (2);
+			move_player(data, x - 1, y);
+			data->game.x--;
+			data->game.mc++;
+			ft_printf("Number of mouvements : %d\n", data->game.mc);
+			win_exit(data);
 		}
-		game->x--;
-		game->move_count++;
+		move_player(data, x - 1, y);
+		data->game.x--;
+		data->game.mc++;
+		ft_printf("Number of mouvements : %d\n", data->game.mc);
 		return (1);
 	}
 	return (0);
 }
 
-static int	move_left(t_game *game)
+static int	move_left(t_data *data)
 {
 	int	x;
 	int	y;
 
-	x = game->x;
-	y = game->y;
-	if (game->map[x][y - 1] != '1')
+	x = data->game.x;
+	y = data->game.y;
+	if (data->game.map[x][y - 1] != '1')
 	{
-		if (game->map[x][y - 1] == 'E')
+		if (data->game.map[x][y - 1] == 'E')
 		{
-			game->y--;
-			game->move_count++;
-			return (2);
+			move_player(data, x, y - 1);
+			data->game.y--;
+			data->game.mc++;
+			ft_printf("Number of mouvements : %d\n", data->game.mc);
+			win_exit(data);
 		}
-		game->y--;
-		game->move_count++;
+		move_player(data, x, y - 1);
+		data->game.y--;
+		data->game.mc++;
+		ft_printf("Number of mouvements : %d\n", data->game.mc);
 		return (1);
 	}
 	return (0);
 }
 
-static int	move_right(t_game *game)
+static int	move_right(t_data *data)
 {
 	int	x;
 	int	y;
 
-	x = game->x;
-	y = game->y;
-	if (game->map[x][y + 1] != '1')
+	x = data->game.x;
+	y = data->game.y;
+	if (data->game.map[x][y + 1] != '1')
 	{
-		if (game->map[x][y + 1] == 'E')
+		if (data->game.map[x][y + 1] == 'E')
 		{
-			game->y++;
-			game->move_count++;
-			return (2);
+			move_player(data, x, y + 1);
+			data->game.y++;
+			data->game.mc++;
+			ft_printf("Number of mouvements : %d\n", data->game.mc);
+			win_exit(data);
 		}
-		game->y++;
-		game->move_count++;
+		move_player(data, x, y + 1);
+		data->game.y++;
+		data->game.mc++;
+		ft_printf("Number of mouvements : %d\n", data->game.mc);
 		return (1);
 	}
 	return (0);
 }
 
-static int	move_bot(t_game *game)
+static int	move_bot(t_data *data)
 {
 	int	x;
 	int	y;
 
-	x = game->x;
-	y = game->y;
-	if (game->map[x + 1][y] != '1')
+	x = data->game.x;
+	y = data->game.y;
+	if (data->game.map[x + 1][y] != '1')
 	{
-		if (game->map[x + 1][y] == 'E')
+		if (data->game.map[x + 1][y] == 'E')
 		{
-			game->x++;
-			game->move_count++;
-			return (2);
+			move_player(data, x + 1, y);
+			data->game.x++;
+			data->game.mc++;
+			ft_printf("Number of mouvements : %d\n", data->game.mc);
+			win_exit(data);
 		}
-		game->x++;
-		game->move_count++;
+		move_player(data, x + 1, y);
+		data->game.x++;
+		data->game.mc++;
+		ft_printf("Number of mouvements : %d\n", data->game.mc);
 		return (1);
 	}
 	return (0);
 }
 
-int	move_end(t_game *game, int key)
+int	move_end(int key, t_data *data)
 {
 	if (key == DOWN)
-		return (move_bot(game));
+		return (move_bot(data));
 	if (key == UP)
-		return (move_up(game));
+		return (move_up(data));
 	if (key == LEFT)
-		return (move_left(game));
+		return (move_left(data));
 	if (key == RIGHT)
-		return (move_right(game));
+		return (move_right(data));
 	else
 		return (0);
 }

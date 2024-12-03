@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:45:49 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/02 18:28:08 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/03 09:39:20 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	parsing(int ac, char **av, t_game *game)
 		return (error_msg("Error\nYou may choose a file."), 0);
 	if (!is_valid_file(av[1]))
 		return (error_msg("Error\nChoose a valid file."), 0);
-	game->map = fill_map(av[1]);
+	game->map = fill_map(av[1], game);
 	if (!game->map)
 		return (get_next_line(-1), error_msg("Error\n"), 0);
 	if (!check_map(game->map))
@@ -89,30 +89,30 @@ int	line_count(char *file)
 	return (i);
 }
 
-char	**fill_map(char *file)
+char	**fill_map(char *file, t_game *game)
 {
 	char	**map;
 	int		i;
 	int		fd;
-	int		size;
 
-	size = line_count(file);
-	if (size < 3)
-		return (0);
-	map = (char **)malloc((sizeof(char *) * size) + 1);
+	game->height = line_count(file);
+	if (game->height < 3)
+		return (NULL);
+	map = (char **)malloc((sizeof(char *) * game->height) + 1);
 	if (!map)
 		return (NULL);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (free_tab(map), NULL);
 	i = -1;
-	while (++i < size)
+	while (++i < game->height)
 	{
 		map[i] = get_next_line(fd);
 		if (!map[i])
 			return (close(fd), free_tab(map), NULL);
 	}
 	close(fd);
+	game->width = ft_strlen(map[0]) - 1;
 	map[i] = 0;
 	return (get_next_line(-1), map);
 }

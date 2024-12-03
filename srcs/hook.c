@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:33:12 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/02 19:49:52 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:01:57 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ void	init_struct(t_data *data, t_sprite *sprite, t_game *game)
 	game->map = NULL;
 }
 
-void	draw_game(t_data *data, t_sprite *sprite)
-{
-	mlx_put_image_to_window(data->mlx, data->wind, sprite->floor, 0, 0);
-}
-
 void	kill_sprites(t_sprite *sprite, t_data *data, char *msg)
 {
 	if (data->mlx && sprite->wall)
@@ -44,6 +39,7 @@ void	kill_sprites(t_sprite *sprite, t_data *data, char *msg)
 		mlx_destroy_image(data->mlx, sprite->exit);
 	if (data->mlx && sprite->player)
 		mlx_destroy_image(data->mlx, sprite->player);
+	free_tab(data->game.map);
 	if (msg)
 		return (error_msg(msg));
 }
@@ -54,35 +50,45 @@ void	load_sprites(t_sprite *sprite, t_data *data)
 	int	height;
 
 	sprite->wall = mlx_xpm_file_to_image(data->mlx, WALL, &width, &height);
-	if (!sprite->wall || (width != height && width != 16))
+	if (!sprite->wall || (width != height && width != XPM))
 		return (kill_sprites(sprite, data, "Error\nCan't load sprites"));
 	sprite->floor = mlx_xpm_file_to_image(data->mlx, FLOOR,
 			&width, &height);
-	if (!sprite->floor || (width != height && width != 16))
+	if (!sprite->floor || (width != height && width != XPM))
 		return (kill_sprites(sprite, data, "Error\nCan't load sprites"));
 	sprite->ext = mlx_xpm_file_to_image(data->mlx, EXT, &width, &height);
-	if (!sprite->ext || (width != height && width != 16))
+	if (!sprite->ext || (width != height && width != XPM))
 		return (kill_sprites(sprite, data, "Error\nCan't load sprites"));
 	sprite->exit = mlx_xpm_file_to_image(data->mlx, EXIT, &width, &height);
-	if (!sprite->exit || (width != height && width != 16))
+	if (!sprite->exit || (width != height && width != XPM))
 		return (kill_sprites(sprite, data, "Error\nCan't load sprites"));
 	sprite->coin = mlx_xpm_file_to_image(data->mlx, COIN, &width, &height);
-	if (!sprite->coin || (width != height && width != 16))
+	if (!sprite->coin || (width != height && width != XPM))
 		return (kill_sprites(sprite, data, "Error\nCan't load sprites"));
 	sprite->player = mlx_xpm_file_to_image(data->mlx, PLAYER,
 			&width, &height);
-	if (!sprite->player || (width != height && width != 16))
+	if (!sprite->player || (width != height && width != XPM))
 		return (kill_sprites(sprite, data, "Error\nCan't load sprites"));
 }
 
 void	hook_master(t_data *data)
 {
+	int	f_width;
+	int	f_height;
+
+	f_width = data->game.width * XPM;
+	f_height = data->game.height * XPM;
+	if (f_height > MCBHEIGHT || f_width > MCBWIDTH)
+		kill_sprites(&data->sprite, data, "Error\nMap too large.");
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return ;
-	data->wind = mlx_new_window(data->mlx, 1000, 800, "so_long");
+	data->wind = mlx_new_window(data->mlx, f_width, f_height, "so_long");
 	if (!data->wind)
 		return ;
 	load_sprites(&data->sprite, data);
+	draw_map(data, &data->sprite, &data->game);
+	mlx_key_hook(data->wind, &move, data);
+	mlx_hook(data->wind, CLOSEBTN, 0, (void *)clean_and_exit, data);
 	mlx_loop(data->mlx);
 }
