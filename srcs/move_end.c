@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:42:51 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/03 14:00:15 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:41:36 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ static int	move_bot(t_data *data)
 
 int	move_end(int key, t_data *data)
 {
+	if (key == ESC)
+		return (clean_and_exit(data), 0);
 	if (key == DOWN)
 		return (move_bot(data));
 	if (key == UP)

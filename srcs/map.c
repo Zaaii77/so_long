@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:29:14 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/03 14:04:39 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:49:13 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	move_player(t_data *data, int y, int x)
 {
 	mlx_put_image_to_window(data->mlx, data->wind, data->sprite.floor,
 		data->game.y * XPM, data->game.x * XPM);
+	mlx_put_image_to_window(data->mlx, data->wind, data->sprite.floor,
+		x * XPM, y * XPM);
 	mlx_put_image_to_window(data->mlx, data->wind, data->sprite.player,
 		x * XPM, y * XPM);
 }
