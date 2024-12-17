@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/03 13:53:15 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:14:34 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@
 # include <fcntl.h>
 
 # ifdef __linux__
-#  define AFAIRE 0
+#  define UP 119
+#  define LEFT 97
+#  define DOWN 115
+#  define RIGHT 100
+#  define ESC 65307
 # else
 #  define UP 13
 #  define LEFT 0
