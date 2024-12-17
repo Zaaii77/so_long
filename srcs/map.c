@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:29:14 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/17 13:49:13 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:01:21 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,19 @@ void	move_player(t_data *data, int y, int x)
 {
 	mlx_put_image_to_window(data->mlx, data->wind, data->sprite.floor,
 		data->game.y * XPM, data->game.x * XPM);
-	mlx_put_image_to_window(data->mlx, data->wind, data->sprite.floor,
-		x * XPM, y * XPM);
 	mlx_put_image_to_window(data->mlx, data->wind, data->sprite.player,
 		x * XPM, y * XPM);
+	if (data->game.map[data->game.x][data->game.y] == 'E')
+	{
+		if (data->game.c != data->game.collected)
+			mlx_put_image_to_window(data->mlx, data->wind,
+				data->sprite.ext, data->game.y * XPM,
+				data->game.x * XPM);
+		else
+			mlx_put_image_to_window(data->mlx, data->wind,
+				data->sprite.exit, data->game.y
+				* XPM, data->game.x * XPM);
+	}
 }
 
 void	draw_map(t_data *data, t_sprite *sprite, t_game *game)
@@ -49,6 +58,8 @@ void	draw_map(t_data *data, t_sprite *sprite, t_game *game)
 				put_xpm(data, sprite->wall, x * XPM, y * XPM);
 			if (game->map[y][x] == 'C')
 				put_xpm(data, sprite->coin, x * XPM, y * XPM);
+			if (game->map[y][x] == 'E')
+				put_xpm(data, sprite->exit, x * XPM, y * XPM);
 			x++;
 		}
 		y++;
