@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/17 10:14:34 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/23 21:19:03 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@
 #  define DOWN 115
 #  define RIGHT 100
 #  define ESC 65307
+#  define LINUX 1
 # else
 #  define UP 13
 #  define LEFT 0
 #  define RIGHT 2
 #  define DOWN 1
 #  define ESC 53
+#  define LINUX 0
 # endif
 
 # define MCBHEIGHT 1112
@@ -39,8 +41,9 @@
 # define WALL "textures/wall.xpm"
 # define PLAYER "textures/player.xpm"
 # define FLOOR "textures/floor.xpm"
-# define EXT "textures/exit.xpm"
-# define EXIT "textures/exit_open.xpm"
+# define EXT "textures/ext.xpm"
+# define EXIT "textures/exit.xpm"
+# define EXTPL "textures/ext_pl.xpm"
 # define XPM 64
 
 typedef struct s_game
@@ -65,6 +68,7 @@ typedef struct s_sprite
 	void	*floor;
 	void	*ext;
 	void	*exit;
+	void	*ext_pl;
 }	t_sprite;
 
 typedef struct s_data

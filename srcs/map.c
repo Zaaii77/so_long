@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:29:14 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/17 18:01:21 by lowatell         ###   ########.fr       */
+/*   Updated: 2024/12/23 21:17:45 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	put_xpm(t_data *data, void *s, int x, int y)
 
 	i = mlx_put_image_to_window(data->mlx, data->wind, s, x, y);
 	if (!i)
-		exit(0);
+		kill_sprites(data->sprite, data, "Error\nCant't put xpm");
 }
 
 void	move_player(t_data *data, int y, int x)
@@ -31,7 +31,7 @@ void	move_player(t_data *data, int y, int x)
 	{
 		if (data->game.c != data->game.collected)
 			mlx_put_image_to_window(data->mlx, data->wind,
-				data->sprite.ext, data->game.y * XPM,
+				data->sprite.ext_pl, data->game.y * XPM,
 				data->game.x * XPM);
 		else
 			mlx_put_image_to_window(data->mlx, data->wind,
@@ -59,7 +59,7 @@ void	draw_map(t_data *data, t_sprite *sprite, t_game *game)
 			if (game->map[y][x] == 'C')
 				put_xpm(data, sprite->coin, x * XPM, y * XPM);
 			if (game->map[y][x] == 'E')
-				put_xpm(data, sprite->exit, x * XPM, y * XPM);
+				put_xpm(data, sprite->ext, x * XPM, y * XPM);
 			x++;
 		}
 		y++;
