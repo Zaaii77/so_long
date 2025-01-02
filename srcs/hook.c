@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:33:12 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/30 19:34:25 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:41:08 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	init_struct(t_data *data, t_sprite *sprite, t_game *game)
 	sprite->player = NULL;
 	sprite->coin = NULL;
 	sprite->wall = NULL;
-	sprite->exit = NULL;
 	sprite->ext_pl = NULL;
 	game->map = NULL;
 }
@@ -40,8 +39,6 @@ void	kill_sprites(t_sprite *sprite, t_data *data, char *msg)
 		mlx_destroy_image(data->mlx, sprite->player);
 	if (data->mlx && sprite->ext_pl)
 		mlx_destroy_image(data->mlx, sprite->ext_pl);
-	if (data->mlx && sprite->exit)
-		mlx_destroy_image(data->mlx, sprite->exit);
 	free_tab(data->game.map);
 	mlx_clear_window(data->mlx, data->wind);
 	mlx_destroy_window(data->mlx, data->wind);
@@ -72,7 +69,6 @@ void	load_sprites(t_sprite *sprite, t_data *data)
 	sprite->coin = sprite_load(sprite->coin, COIN, sprite, data);
 	sprite->floor = sprite_load(sprite->floor, FLOOR, sprite, data);
 	sprite->ext = sprite_load(sprite->ext, EXT, sprite, data);
-	sprite->exit = sprite_load(sprite->exit, EXIT, sprite, data);
 	sprite->player = sprite_load(sprite->player, PLAYER, sprite, data);
 	sprite->ext_pl = sprite_load(sprite->ext_pl, EXTPL, sprite, data);
 }

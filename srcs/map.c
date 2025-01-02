@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:29:14 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/30 19:22:45 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:42:41 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	put_xpm(t_data *data, void *s, int x, int y)
 
 void	move_player(t_data *data, int y, int x)
 {
-	
 	mlx_put_image_to_window(data->mlx, data->wind, data->sprite.floor,
 		data->game.y * XPM, data->game.x * XPM);
 	mlx_put_image_to_window(data->mlx, data->wind, data->sprite.player,
@@ -36,7 +35,7 @@ void	move_player(t_data *data, int y, int x)
 				y * XPM);
 		else
 			mlx_put_image_to_window(data->mlx, data->wind,
-				data->sprite.exit, x * XPM, y * XPM);
+				data->sprite.ext, x * XPM, y * XPM);
 	}
 	if (data->game.map[data->game.x][data->game.y] == 'E')
 	{

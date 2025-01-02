@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/30 19:33:41 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:38:51 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@
 # define PLAYER "textures/player.xpm"
 # define FLOOR "textures/floor.xpm"
 # define EXT "textures/ext.xpm"
-# define EXIT "textures/exit.xpm"
 # define EXTPL "textures/ext_pl.xpm"
 # define XPM 64
 
@@ -67,7 +66,6 @@ typedef struct s_sprite
 	void	*player;
 	void	*floor;
 	void	*ext;
-	void	*exit;
 	void	*ext_pl;
 }	t_sprite;
 
