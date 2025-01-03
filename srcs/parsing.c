@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:45:49 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/17 11:00:40 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/03 08:16:05 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	parsing(int ac, char **av, t_game *game)
 	if (!game->map)
 		return (error_msg("Error\n"), 0);
 	if (!check_map(game->map))
-		return (error_msg("Error\nMap is not valid."), 0);
+		return (free_tab(game->map), error_msg("Error\nMap is not valid."), 0);
 	if (!map_is_valid(game))
 		return (error_msg("Error\nMap is not playable."), 0);
 	return (1);
