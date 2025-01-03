@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:33:12 by lowatell          #+#    #+#             */
-/*   Updated: 2025/01/02 19:41:08 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:55:42 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,16 @@ void	kill_sprites(t_sprite *sprite, t_data *data, char *msg)
 	if (data->mlx && sprite->ext_pl)
 		mlx_destroy_image(data->mlx, sprite->ext_pl);
 	free_tab(data->game.map);
-	mlx_clear_window(data->mlx, data->wind);
-	mlx_destroy_window(data->mlx, data->wind);
-	if (LINUX == 1)
-		mlx_destroy_display(data->mlx);
-	free(data->mlx);
 	if (msg)
 		return (error_msg(msg));
+	if (data->mlx)
+	{
+		mlx_clear_window(data->mlx, data->wind);
+		mlx_destroy_window(data->mlx, data->wind);
+		if (LINUX == 1 && data->mlx)
+			mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
 }
 
 void	*sprite_load(void *s, char *file, t_sprite *sprite, t_data *data)
