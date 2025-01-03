@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:45:49 by lowatell          #+#    #+#             */
-/*   Updated: 2025/01/03 08:16:05 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/03 08:32:40 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	parsing(int ac, char **av, t_game *game)
 {
-	if (ac < 2 || ac > 3)
+	if (ac < 2)
 		return (error_msg("Error\nYou may choose a file."), 0);
+	if (ac > 2)
+		return (error_msg("Error\nYou can only choose one map."), 0);
 	if (!is_valid_file(av[1]))
 		return (error_msg("Error\nChoose a valid file."), 0);
 	game->map = fill_map(av[1], game);
