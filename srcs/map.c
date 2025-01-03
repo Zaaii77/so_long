@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:29:14 by lowatell          #+#    #+#             */
-/*   Updated: 2025/01/02 19:42:41 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/03 17:18:55 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,23 @@ void	put_xpm(t_data *data, void *s, int x, int y)
 	int	i;
 
 	i = mlx_put_image_to_window(data->mlx, data->wind, s, x, y);
-	if (!i)
+	if (i == -1)
 		kill_sprites(&data->sprite, data, "Error\nCant't put xpm");
 }
 
 void	move_player(t_data *data, int y, int x)
 {
-	mlx_put_image_to_window(data->mlx, data->wind, data->sprite.floor,
-		data->game.y * XPM, data->game.x * XPM);
-	mlx_put_image_to_window(data->mlx, data->wind, data->sprite.player,
-		x * XPM, y * XPM);
+	put_xpm(data, data->sprite.floor, data->game.y * XPM, data->game.x * XPM);
+	put_xpm(data, data->sprite.player, x * XPM, y * XPM);
 	if (data->game.map[y][x] == 'E')
 	{
 		if (data->game.c != data->game.collected)
-			mlx_put_image_to_window(data->mlx, data->wind,
-				data->sprite.ext_pl, x * XPM,
-				y * XPM);
+			put_xpm(data, data->sprite.ext_pl, x * XPM, y * XPM);
 		else
-			mlx_put_image_to_window(data->mlx, data->wind,
-				data->sprite.ext, x * XPM, y * XPM);
+			put_xpm(data, data->sprite.ext, x * XPM, y * XPM);
 	}
 	if (data->game.map[data->game.x][data->game.y] == 'E')
-	{
-		mlx_put_image_to_window(data->mlx, data->wind,
-			data->sprite.ext, data->game.x * XPM, data->game.y * XPM);
-	}
+		put_xpm(data, data->sprite.ext, data->game.x * XPM, data->game.y * XPM);
 }
 
 void	draw_map(t_data *data, t_sprite *sprite, t_game *game)

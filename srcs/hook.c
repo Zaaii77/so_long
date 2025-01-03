@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:33:12 by lowatell          #+#    #+#             */
-/*   Updated: 2025/01/03 15:55:42 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/03 17:03:22 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	kill_sprites(t_sprite *sprite, t_data *data, char *msg)
 	if (data->mlx && sprite->ext_pl)
 		mlx_destroy_image(data->mlx, sprite->ext_pl);
 	free_tab(data->game.map);
-	if (msg)
-		return (error_msg(msg));
 	if (data->mlx)
 	{
 		mlx_clear_window(data->mlx, data->wind);
@@ -50,6 +48,8 @@ void	kill_sprites(t_sprite *sprite, t_data *data, char *msg)
 			mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
+	if (msg)
+		return (error_msg(msg));
 }
 
 void	*sprite_load(void *s, char *file, t_sprite *sprite, t_data *data)
@@ -87,10 +87,10 @@ void	hook_master(t_data *data)
 		kill_sprites(&data->sprite, data, "Error\nMap too large.");
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		return ;
+		kill_sprites(&data->sprite, data, "Error\nCan't init mlx.");
 	data->wind = mlx_new_window(data->mlx, f_width, f_height, "so_long");
 	if (!data->wind)
-		return ;
+		kill_sprites(&data->sprite, data, "Error\nCan't create window.");
 	load_sprites(&data->sprite, data);
 	draw_map(data, &data->sprite, &data->game);
 	mlx_key_hook(data->wind, &move, data);
