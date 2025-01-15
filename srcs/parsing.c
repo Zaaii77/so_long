@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 23:45:49 by lowatell          #+#    #+#             */
-/*   Updated: 2025/01/03 08:32:40 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/15 10:19:20 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int	check_map(char **map)
 		}
 		i++;
 	}
-	if (++i == ft_strlen(map[0]))
-		return (0);
 	return (1);
 }
 

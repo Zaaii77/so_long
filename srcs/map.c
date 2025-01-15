@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:29:14 by lowatell          #+#    #+#             */
-/*   Updated: 2025/01/03 17:18:55 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:56:56 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ void	move_player(t_data *data, int y, int x)
 		if (data->game.c != data->game.collected)
 			put_xpm(data, data->sprite.ext_pl, x * XPM, y * XPM);
 		else
-			put_xpm(data, data->sprite.ext, x * XPM, y * XPM);
+			put_xpm(data, data->sprite.ext, data->game.x * XPM,
+				data->game.y * XPM);
 	}
 	if (data->game.map[data->game.x][data->game.y] == 'E')
-		put_xpm(data, data->sprite.ext, data->game.x * XPM, data->game.y * XPM);
+		put_xpm(data, data->sprite.ext, data->game.y * XPM, data->game.x * XPM);
 }
 
 void	draw_map(t_data *data, t_sprite *sprite, t_game *game)
