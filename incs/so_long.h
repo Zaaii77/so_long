@@ -6,7 +6,7 @@
 /*   By: lowatell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:30:07 by lowatell          #+#    #+#             */
-/*   Updated: 2025/01/02 19:38:51 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:10:03 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 #  define LINUX 0
 # endif
 
-# define MCBHEIGHT 1112
-# define MCBWIDTH 1710
+# define MCBHEIGHT 3840
+# define MCBWIDTH 2160
 # define CLOSEBTN 17
 
 # define COIN "textures/coin.xpm"
