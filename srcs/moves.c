@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:42:51 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/17 10:15:19 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:19:18 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	move_up(t_data *data)
 
 	x = data->game.x;
 	y = data->game.y;
-	if (data->game.map[x - 1][y] != '1')
+	if (data->game.map[x - 1][y] && data->game.map[x - 1][y] != '1')
 	{
 		if (data->game.map[x - 1][y] == 'C')
 		{
@@ -42,7 +42,7 @@ static int	move_left(t_data *data)
 
 	x = data->game.x;
 	y = data->game.y;
-	if (data->game.map[x][y - 1] != '1')
+	if (data->game.map[x][y - 1] && data->game.map[x][y - 1] != '1')
 	{
 		if (data->game.map[x][y - 1] == 'C')
 		{
@@ -65,7 +65,7 @@ static int	move_right(t_data *data)
 
 	x = data->game.x;
 	y = data->game.y;
-	if (data->game.map[x][y + 1] != '1')
+	if (data->game.map[x][y + 1] && data->game.map[x][y + 1] != '1')
 	{
 		if (data->game.map[x][y + 1] == 'C')
 		{
@@ -88,7 +88,7 @@ static int	move_bot(t_data *data)
 
 	x = data->game.x;
 	y = data->game.y;
-	if (data->game.map[x + 1][y] != '1')
+	if (data->game.map[x + 1][y] && data->game.map[x + 1][y] != '1')
 	{
 		if (data->game.map[x + 1][y] == 'C')
 		{

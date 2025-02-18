@@ -6,7 +6,7 @@
 /*   By: lowatell <lowatell@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 22:11:54 by lowatell          #+#    #+#             */
-/*   Updated: 2024/12/02 13:44:52 by lowatell         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:21:52 by lowatell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,21 @@ char	**map_duplication(char **map)
 	return (nmap);
 }
 
-void	back_tracking(char **map, int x, int y)
+void	back_tracking(char **map, int x, int y, t_game *game)
 {
 	map[x][y] = 'A';
-	if (map[x][y + 1] != '1' && map[x][y + 1] != 'A')
-		back_tracking(map, x, y + 1);
-	if (map[x][y - 1] != '1' && map[x][y - 1] != 'A')
-		back_tracking(map, x, y - 1);
-	if (map[x + 1][y] != '1' && map[x + 1][y] != 'A')
-		back_tracking(map, x + 1, y);
-	if (map[x - 1][y] != '1' && map[x - 1][y] != 'A')
-		back_tracking(map, x - 1, y);
+	if (y < game->width)
+		if (map[x][y + 1] != '1' && map[x][y + 1] != 'A')
+			back_tracking(map, x, y + 1, game);
+	if (y > 0)
+		if (map[x][y - 1] != '1' && map[x][y - 1] != 'A')
+			back_tracking(map, x, y - 1, game);
+	if (x < game->height)
+		if (map[x + 1][y] != '1' && map[x + 1][y] != 'A')
+			back_tracking(map, x + 1, y, game);
+	if (x > 0)
+		if (map[x - 1][y] != '1' && map[x - 1][y] != 'A')
+			back_tracking(map, x - 1, y, game);
 }
 
 int	check_nmap(char **nmap)
@@ -77,7 +81,7 @@ int	is_finishable(t_game *game)
 	nmap = map_duplication(game->map);
 	if (!nmap)
 		return (0);
-	back_tracking(nmap, game->x, game->y);
+	back_tracking(nmap, game->x, game->y, game);
 	if (!check_nmap(nmap))
 		return (free_tab(nmap), 0);
 	free_tab(nmap);
