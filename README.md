@@ -16,7 +16,7 @@
 ## How to Build and Run
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:Zaaii77/so_long.git
    cd ft_printf/so_long
    ```
 
